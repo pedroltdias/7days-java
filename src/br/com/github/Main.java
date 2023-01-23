@@ -27,25 +27,33 @@ public class Main {
 
         String[] moviesArray = parseJsonMovies(json);
 
+        System.out.println(moviesArray[1]);
+
         List<String> titles = parseTitles(moviesArray);
         titles.forEach(System.out::println);
 
         List<String> urlImages = parseUrlImages(moviesArray);
         urlImages.forEach(System.out::println);
+
+        List<String> ratings = parseRatings(moviesArray);
+        ratings.forEach(System.out::println);
+
+        List<String> years = parseYears(moviesArray);
+        years.forEach(System.out::println);
     }
 
     private static String[] parseJsonMovies(String json) {
-        Matcher matcher = Pattern.compile(".*\\[(.*)\\].*").matcher(json);
+        Matcher matcher = Pattern.compile(".*\\[(.*)\\].*").matcher(json); //acha o json
 
         if (!matcher.matches()) {
             throw new IllegalArgumentException("no match in " + json);
         }
 
-        String[] moviesArray = matcher.group(1).split("\\},\\{");
-        moviesArray[0] = moviesArray[0].substring(1);
-        int last = moviesArray.length - 1;
-        String lastString = moviesArray[last];
-        moviesArray[last] = lastString.substring(0, lastString.length() - 1);
+        String[] moviesArray = matcher.group(1).split("\\},\\{"); //separa os objetos no json
+        moviesArray[0] = moviesArray[0].substring(1); //a primeira posição do array é um "{", a partir dessa linha a primeira posição vira o primeiro filme
+        int last = moviesArray.length - 1; //pega o tamanho da string -1 = 249
+        String lastString = moviesArray[last]; //salva o ultimo objeto
+        moviesArray[last] = lastString.substring(0, lastString.length() - 1); //retira o "}" da ultima posição do array e coloca um objeto
         return moviesArray;
     }
 
@@ -53,8 +61,16 @@ public class Main {
         return parseAttribute(moviesArray, 3);
     }
 
+    private static List<String> parseYears(String[] moviesArray) {
+        return parseAttribute(moviesArray, 4);
+    }
+
     private static List<String> parseUrlImages(String[] moviesArray) {
         return parseAttribute(moviesArray, 5);
+    }
+
+    private static List<String> parseRatings(String[] moviesArray) {
+        return parseAttribute(moviesArray, 7);
     }
 
     private static List<String> parseAttribute(String[] moviesArray, int pos) {
