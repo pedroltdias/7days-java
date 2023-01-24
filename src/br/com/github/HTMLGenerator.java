@@ -24,6 +24,7 @@ public class HTMLGenerator {
                 </div>
                 """;
         this.writer.write(htmlTop());
+        System.out.println("[HTMLGenerator] Gerando corpo da pagina...");
         for (Movie movie : movies) {
             this.writer.println(String.format(divTemplate, movie.getTitle(), movie.getUrlImage(), movie.getTitle(), movie.getRating(), movie.getYear()));
         }
@@ -33,6 +34,7 @@ public class HTMLGenerator {
     }
 
     private String htmlTop(){
+        System.out.println("[HTMLGenerator] Gerando topo da pagina...");
         return "<!DOCTYPE html>" +
                     "<html lang=\"en\">" +
                         "<head>" +
@@ -46,6 +48,7 @@ public class HTMLGenerator {
     }
 
     private String htmlBottom(){
+        System.out.println("[HTMLGenerator] Gerando final da pagina...");
         return  "</div>" +
                 "<script src=\"https://code.jquery.com/jquery-3.2.1.slim.min.js\" integrity=\"sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN\" crossorigin=\"anonymous\"></script>" +
                 "<script src=\"https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js\" integrity=\"sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q\" crossorigin=\"anonymous\"></script>" +
