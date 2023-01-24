@@ -46,9 +46,8 @@ public class Main {
             movies.add(new Movie(titles.get(i), urlImages.get(i), ratings.get(i), years.get(i)));
         }
 
-        for (Movie movie: movies) {
-            System.out.println(movie);
-        }
+        HTMLGenerator htmlGenerator = new HTMLGenerator();
+        htmlGenerator.generate(movies);
     }
 
     private static String[] parseJsonMovies(String json) {
