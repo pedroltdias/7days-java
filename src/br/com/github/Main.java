@@ -5,6 +5,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -12,6 +13,8 @@ import java.util.stream.Stream;
 import java.util.List;
 
 public class Main {
+    private static List<Movie> movies = new ArrayList<>();
+
     public static void main(String[] args) throws IOException, InterruptedException {
 
         HttpClient client = HttpClient.newHttpClient();
@@ -27,19 +30,25 @@ public class Main {
 
         String[] moviesArray = parseJsonMovies(json);
 
-        System.out.println(moviesArray[1]);
-
         List<String> titles = parseTitles(moviesArray);
-        titles.forEach(System.out::println);
+//        titles.forEach(System.out::println);
 
         List<String> urlImages = parseUrlImages(moviesArray);
-        urlImages.forEach(System.out::println);
+//        urlImages.forEach(System.out::println);
 
         List<String> ratings = parseRatings(moviesArray);
-        ratings.forEach(System.out::println);
+//        ratings.forEach(System.out::println);
 
         List<String> years = parseYears(moviesArray);
-        years.forEach(System.out::println);
+//        years.forEach(System.out::println);
+
+        for (int i = 0; i < moviesArray.length; i++) {
+            movies.add(new Movie(titles.get(i), urlImages.get(i), ratings.get(i), years.get(i)));
+        }
+
+        for (Movie movie: movies) {
+            System.out.println(movie);
+        }
     }
 
     private static String[] parseJsonMovies(String json) {
