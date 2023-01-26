@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class ImdbMovieJsonParser {
+public class ImdbMovieJsonParser implements JsonParser{
     private String[] moviesarray;
     private List<String> titles;
     private List<String> urlImages;
@@ -15,6 +15,7 @@ public class ImdbMovieJsonParser {
     private List<String> years;
     private List<Movie> movies = new ArrayList<>();
 
+    @Override
     public List<Movie> parse(String json){
         this.moviesarray = this.parseJsonMovies(json);
         this.titles = this.parseTitles(this.moviesarray);

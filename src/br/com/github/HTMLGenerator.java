@@ -26,7 +26,7 @@ public class HTMLGenerator {
         this.writer.write(htmlTop());
         System.out.println("[HTMLGenerator] Gerando corpo da pagina...");
         for (Movie movie : movies) {
-            this.writer.println(String.format(divTemplate, movie.getTitle(), movie.getUrlImage(), movie.getTitle(), movie.getRating(), movie.getYear()));
+            this.writer.println(String.format(divTemplate, movie.title(), movie.urlImage(), movie.title(), movie.rating(), movie.year()));
         }
         this.writer.write(htmlBottom());
         this.writer.close();

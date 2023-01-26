@@ -1,6 +1,6 @@
 package br.com.github;
 
-public class Movie {
+public class Movie implements Content{
     private String title;
     private String urlImage;
     private String rating;
@@ -13,20 +13,24 @@ public class Movie {
         this.year = year;
     }
 
-    public String getTitle() {
-        return title;
+    @Override
+    public String title() {
+        return this.title;
     }
 
-    public String getUrlImage() {
-        return urlImage;
+    @Override
+    public String urlImage() {
+        return this.urlImage;
     }
 
-    public String getRating() {
-        return rating;
+    @Override
+    public String rating() {
+        return this.rating;
     }
 
-    public String getYear() {
-        return year;
+    @Override
+    public String year() {
+        return this.year;
     }
 
     @Override
@@ -37,5 +41,10 @@ public class Movie {
                 ", rating='" + rating + '\'' +
                 ", year='" + year + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Content o) {
+        return 0;
     }
 }
